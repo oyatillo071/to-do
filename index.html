@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style/styles.css" />
+    <title>4 oy 7 dars</title>
+    <link
+      rel="shortcut icon"
+      href="./images/icons8-javascript.svg"
+      type="image/x-icon"
+    />
+  </head>
+  <body>
+    <!--  -->
+    <main class="main_light">
+      <div class="container">
+        <!--  -->
+        <div class="logo_bar">
+          <h4 class="logo">TODO</h4>
+
+          <img class="mode" src="./images/moon.svg" alt="mode change" />
+        </div>
+
+        <form class="create_form whitebg"  action="">
+          <input type="checkbox" class="create_checkbox" id="create_checkbox" />
+          <label for="create_checkbox">Create a new todo…</label>
+          <span class="close-btn close-create_checkbox">X</span>
+        </form>
+
+        <form
+          style="margin-top: 40px whitebg"
+          class="create_bottom_form"
+          action=""
+        >
+          <div class="checkbox_wrapper whitebg">
+            <input type="checkbox" class="create_checkbox" id="todo-1" />
+            <label
+              for="todo-1"
+              style="color: #d1d2da; text-decoration: line-through"
+            >
+              Complete online JavaScript course
+              <span class="close-btn close-todo-1">X</span>
+            </label>
+          </div>
+          <div class="checkbox_wrapper whitebg">
+            <input type="checkbox" class="create_checkbox" id="todo-2" />
+            <label for="todo-2">
+              Jog around the park 3x
+              <span class="close-btn close-todo-2">X</span>
+            </label>
+          </div>
+          <div class="checkbox_wrapper whitebg">
+            <input type="checkbox" class="create_checkbox" id="todo-3" />
+            <label for="todo-3">
+              10 minutes meditation
+              <span class="close-btn close-todo-3">X</span>
+            </label>
+          </div>
+          <div class="checkbox_wrapper whitebg">
+            <input type="checkbox" class="create_checkbox" id="todo-4" />
+            <label for="todo-4">
+              Read for 1 hour
+              <span class="close-btn close-todo-4">X</span>
+            </label>
+          </div>
+          <div class="checkbox_wrapper whitebg">
+            <input type="checkbox" class="create_checkbox" id="todo-5" />
+            <label for="todo-5">
+              Pick up groceries
+              <span class="close-btn close-todo-5">X</span>
+            </label>
+          </div>
+          <div class="checkbox_wrapper whitebg">
+            <input type="checkbox" class="create_checkbox" id="todo-6" />
+            <label for="todo-6">
+              Complete Todo App on Frontend Mentor
+              <span class="close-btn close-todo-6">X</span>
+            </label>
+          </div>
+
+          <div class="form_info">
+            <p id="items-left">5 items left</p>
+            <div class="info_link">
+              <a href="#" id="select-all">All</a>
+              <a href="#" id="select-active">Active</a>
+              <a href="#" id="select-completed">Completed</a>
+            </div>
+            <p id="clear-completed">Clear Completed</p>
+          </div>
+        </form>
+        <h4>Drag and drop to reader list</h4>
+        <!--  -->
+      </div>
+    </main>
+    <!--  -->
+
+    <script src="./js/index.js"></script>
+  </body>
+</html>
