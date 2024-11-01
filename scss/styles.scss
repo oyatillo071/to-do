@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Josefin Sans",sans-serif;
+  font-family: "Josefin Sans", sans-serif;
 }
 a {
   text-decoration: none;
@@ -52,26 +52,32 @@ a {
   margin-bottom: 40px;
   box-shadow: 0px 35px 50px -15px #c2c3d680;
 }
+.create_checkbox {
+  border: none;
+  font-size: 18px;
+
+  outline: none;
+  &:focus {
+    border: none;
+  }
+}
 .checkbox_wrapper {
   display: flex;
   position: relative;
   align-items: center;
   gap: 10px;
   padding: 20px 40px;
-  box-shadow: 0px 35px 50px -15px #c2c3d680;
   border-top: 1px solid #e3e4f1;
   border-bottom: 1px solid #e3e4f1;
 }
 
 .create_bottom_form {
-  border: 1px solid #e3e4f1;
   a {
     font-size: 16px;
     font-weight: 700;
     line-height: 14px;
     letter-spacing: -0.1944444477558136px;
     text-align: left;
-    color: #3a7cfd;
   }
   p {
     font-size: 16px;
@@ -140,9 +146,12 @@ input[type="checkbox"]:checked + label::after {
 }
 #clear-completed,
 #select-active,
-#select-completed {
+#select-completed,a {
   color: #b7b7b7;
   cursor: grab;
+  &:hover {
+    color: rgba(58, 124, 253, 1);
+  }
 }
 .close-btn {
   cursor: pointer;
@@ -211,6 +220,9 @@ h4 {
     margin-right: 60px;
     font-size: 15px;
   }
+  .create_form {
+    padding: 20px 10px;
+  }
 }
 
 .form_info {
@@ -242,7 +254,6 @@ body.dark-mode {
 
 .main_dark {
   transition: all 0.3s linear;
-
   background-image: url(../images/darkBitmap.png);
   background-repeat: no-repeat;
   height: 300px;
@@ -255,15 +266,24 @@ body.dark-mode {
 .whitebg {
   background-color: #fff;
   box-shadow: 0px 35px 50px -15px rgba(194, 195, 214, 0.5);
-
 }
 .darkbg {
   background-color: rgba(37, 39, 61, 1);
   box-shadow: 0px 35px 50px -15px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(57, 58, 75, 1);
-  label{
+  label {
     color: rgba(200, 203, 231, 1);
-
   }
+  input {
+    color: #fff;
+    border: none;
+  }
+  .checkbox_wrapper {
+    border-top: 1px solid rgba(57, 58, 75, 1);
+    border-bottom: 1px solid rgba(57, 58, 75, 1);
+  }
+}
 
+a:hover {
+  color: rgba(58, 124, 253, 1);
 }

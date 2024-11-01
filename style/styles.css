@@ -57,27 +57,31 @@ a {
   box-shadow: 0px 35px 50px -15px rgba(194, 195, 214, 0.5019607843);
 }
 
+.create_checkbox {
+  border: none;
+  font-size: 18px;
+  outline: none;
+}
+.create_checkbox:focus {
+  border: none;
+}
+
 .checkbox_wrapper {
   display: flex;
   position: relative;
   align-items: center;
   gap: 10px;
   padding: 20px 40px;
-  box-shadow: 0px 35px 50px -15px rgba(194, 195, 214, 0.5019607843);
   border-top: 1px solid #e3e4f1;
   border-bottom: 1px solid #e3e4f1;
 }
 
-.create_bottom_form {
-  border: 1px solid #e3e4f1;
-}
 .create_bottom_form a {
   font-size: 16px;
   font-weight: 700;
   line-height: 14px;
   letter-spacing: -0.1944444478px;
   text-align: left;
-  color: #3a7cfd;
 }
 .create_bottom_form p {
   font-size: 16px;
@@ -146,9 +150,14 @@ input[type=checkbox]:checked + label::after {
 
 #clear-completed,
 #select-active,
-#select-completed {
+#select-completed, a {
   color: #b7b7b7;
   cursor: grab;
+}
+#clear-completed:hover,
+#select-active:hover,
+#select-completed:hover, a:hover {
+  color: rgb(58, 124, 253);
 }
 
 .close-btn {
@@ -217,6 +226,9 @@ h4 {
     margin-right: 60px;
     font-size: 15px;
   }
+  .create_form {
+    padding: 20px 10px;
+  }
 }
 .form_info {
   display: grid;
@@ -263,4 +275,16 @@ body.dark-mode {
 }
 .darkbg label {
   color: rgb(200, 203, 231);
+}
+.darkbg input {
+  color: #fff;
+  border: none;
+}
+.darkbg .checkbox_wrapper {
+  border-top: 1px solid rgb(57, 58, 75);
+  border-bottom: 1px solid rgb(57, 58, 75);
+}
+
+a:hover {
+  color: rgb(58, 124, 253);
 }/*# sourceMappingURL=styles.css.map */
