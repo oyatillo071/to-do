@@ -1,59 +1,56 @@
+const creator = document.querySelector("#create_checkbox");
+
 function updateCheckboxes() {
   return document.querySelectorAll(".create_checkbox");
 }
 
-function updateItemsLeft() {
+function filterTodos(filter) {
   const allCheckboxes = updateCheckboxes();
-  const uncheckedCount = Array.from(allCheckboxes).filter(
-    (cb) => !cb.checked
-  ).length;
-  itemsLeftText.textContent = `${uncheckedCount} items left`;
+
+  allCheckboxes.forEach((checkbox) => {
+    const todoItem = checkbox.parentElement;
+    if (filter === "all") {
+      todoItem.style.display = "flex";
+    } else if (filter === "active" && !checkbox.checked) {
+      todoItem.style.display = "flex";
+    } else if (filter === "completed" && checkbox.checked) {
+      todoItem.style.display = "flex";
+    } else {
+      todoItem.style.display = "none";
+    }
+  });
 }
 
+// 'All' filter
 document.getElementById("select-all").addEventListener("click", (e) => {
   e.preventDefault();
-  const allCheckboxes = updateCheckboxes();
-  allCheckboxes.forEach((checkbox) => {
-    checkbox.checked = true;
-    checkbox.nextElementSibling.style.textDecoration = "underline";
-  });
-  updateItemsLeft();
+  filterTodos("all");
 });
 
+// 'Active' filter
 document.getElementById("select-active").addEventListener("click", (e) => {
   e.preventDefault();
-  const allCheckboxes = updateCheckboxes();
-  allCheckboxes.forEach((checkbox) => {
-    checkbox.checked = false;
-    checkbox.nextElementSibling.style.textDecoration = "none";
-  });
-  updateItemsLeft();
+  filterTodos("active");
 });
-const creator = document.querySelector("#create_checkbox");
 
+// 'Completed' filter
+document.getElementById("select-completed").addEventListener("click", (e) => {
+  e.preventDefault();
+  filterTodos("completed");
+});
+
+// 'Clear Completed' button removes completed items
 document.getElementById("clear-completed").addEventListener("click", (e) => {
   e.preventDefault();
   const allCheckboxes = updateCheckboxes();
-  allCheckboxes.forEach((checkbox) => {
-    if (checkbox.checked && checkbox != creator) {
-      checkbox.parentElement.remove();
-    }
-  });
-  count = 0;
-  innerCount(count);
-  
-  updateItemsLeft();
-});
 
-document.getElementById("select-completed").addEventListener("click", (e) => {
-  e.preventDefault();
-  const allCheckboxes = updateCheckboxes();
   allCheckboxes.forEach((checkbox) => {
-    if (checkbox.checked) {
-      checkbox.nextElementSibling.style.textDecoration = "underline";
+    if (checkbox.checked && checkbox !== creator) {
+      checkbox.parentElement.remove();
+      count--;
     }
   });
-  updateItemsLeft();
+  innerCount(count);
 });
 
 function addCloseButtonListeners() {
@@ -61,7 +58,7 @@ function addCloseButtonListeners() {
     button.addEventListener("click", (e) => {
       e.stopPropagation();
       button.parentElement.parentElement.remove();
-      updateItemsLeft();
+      innerCount(count);
     });
   });
 }
