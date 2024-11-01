@@ -1,4 +1,5 @@
 const creator = document.querySelector("#create_checkbox");
+const creatorClass = document.querySelector(".create_checkbox");
 
 function updateCheckboxes() {
   return document.querySelectorAll(".create_checkbox");
@@ -8,7 +9,11 @@ function filterTodos(filter) {
   const allCheckboxes = updateCheckboxes();
 
   allCheckboxes.forEach((checkbox) => {
+    if (checkbox == creator) {
+      return;
+    }
     const todoItem = checkbox.parentElement;
+
     if (filter === "all") {
       todoItem.style.display = "flex";
     } else if (filter === "active" && !checkbox.checked) {
@@ -21,31 +26,27 @@ function filterTodos(filter) {
   });
 }
 
-// 'All' filter
 document.getElementById("select-all").addEventListener("click", (e) => {
   e.preventDefault();
   filterTodos("all");
 });
 
-// 'Active' filter
 document.getElementById("select-active").addEventListener("click", (e) => {
   e.preventDefault();
   filterTodos("active");
 });
 
-// 'Completed' filter
 document.getElementById("select-completed").addEventListener("click", (e) => {
   e.preventDefault();
   filterTodos("completed");
 });
 
-// 'Clear Completed' button removes completed items
 document.getElementById("clear-completed").addEventListener("click", (e) => {
   e.preventDefault();
   const allCheckboxes = updateCheckboxes();
 
   allCheckboxes.forEach((checkbox) => {
-    if (checkbox.checked && checkbox !== creator) {
+    if (checkbox.checked && checkbox != creator) {
       checkbox.parentElement.remove();
       count--;
     }
