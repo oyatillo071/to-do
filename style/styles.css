@@ -74,6 +74,7 @@ a {
   padding: 20px 40px;
   border-top: 1px solid #e3e4f1;
   border-bottom: 1px solid #e3e4f1;
+  transition: all 1s linear;
 }
 
 .create_bottom_form a {
@@ -287,4 +288,9 @@ body.dark-mode {
 
 a:hover {
   color: rgb(58, 124, 253);
+}
+
+.to-do_block {
+  max-height: 400px;
+  overflow-y: auto;
 }/*# sourceMappingURL=styles.css.map */

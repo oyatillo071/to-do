@@ -5,6 +5,13 @@ function updateCheckboxes() {
   return document.querySelectorAll(".create_checkbox");
 }
 
+function localSave(data) {
+  const allCheckboxes = updateCheckboxes();
+  localStorage.setItem("checkboxList", JSON.stringify(allCheckboxes));
+  console.log(localStorage.getItem("checkboxList"));
+}
+localSave();
+
 function filterTodos(filter) {
   const allCheckboxes = updateCheckboxes();
 
@@ -113,8 +120,6 @@ mode.addEventListener("click", () => {
       ? form.classList.replaceAll("whitebg", "darkbg")
       : form.classList.replaceAll("darkbg", "whitebg");
   });
-
-  // checkboxChange();
 });
 
 const createCheckboxInput = document.getElementById("create_checkbox");
@@ -127,13 +132,20 @@ function innerCount(counter) {
 
 innerCount(count);
 
+let todos = [];
+
+function saveTodosStorage() {
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
+
 createCheckboxInput.addEventListener("keydown", (e) => {
   if (e.key == "Enter") {
     e.preventDefault();
 
     const todoText = createCheckboxInput.value.trim();
-    if (todoText !== "") {
+    if (todoText !== "" && todoText.length > 4) {
       count++;
+
       const todoDiv = document.createElement("div");
       todoDiv.classList.add("checkbox_wrapper");
 
@@ -146,6 +158,9 @@ createCheckboxInput.addEventListener("keydown", (e) => {
         checkboxInput.checked
           ? (label.style.textDecoration = " line-through")
           : (label.style.textDecoration = "none");
+
+        updateTodoCheckedStatus(checkboxInput.id, checkboxInput.checked);
+        saveTodosStorage();
       });
 
       const label = document.createElement("label");
@@ -159,6 +174,7 @@ createCheckboxInput.addEventListener("keydown", (e) => {
         todoBlock.removeChild(todoDiv);
         count--;
         innerCount(count);
+        saveTodosStorage();
       });
 
       label.appendChild(closeButton);
@@ -168,11 +184,71 @@ createCheckboxInput.addEventListener("keydown", (e) => {
 
       createCheckboxInput.value = "";
 
-      innerCount(count);
+      todos.push({ id: checkboxInput.id, text: todoText, checked: false });
+      saveTodosStorage();
 
-      // document.body.classList.contains("dark-mode")
-      //   ? todoDiv.classList.add("darkbg")
-      //   : todoDiv.classList.add("whitebg");
+      innerCount(count);
+    } else {
+      alert("kamida 4 ta elementdan iborat bolishi kerak!");
+      createCheckboxInput.focus();
+      createCheckboxInput.scrollIntoView();
     }
   }
 });
+
+function updateTodoCheckedStatus(id, checked) {
+  const todo = todos.find((todo) => todo.id === id);
+  if (todo) {
+    todo.checked = checked;
+  }
+}
+
+function loadLocal() {
+  const savedTodos = JSON.parse(localStorage.getItem("todos")) || [];
+  todos = savedTodos;
+
+  todos.forEach((todo) => {
+    const todoDiv = document.createElement("div");
+    todoDiv.classList.add("checkbox_wrapper");
+
+    const checkboxInput = document.createElement("input");
+    checkboxInput.type = "checkbox";
+    checkboxInput.classList.add("create_checkbox");
+    checkboxInput.id = todo.id;
+    checkboxInput.checked = todo.checked;
+
+    checkboxInput.addEventListener("change", () => {
+      checkboxInput.checked
+        ? (label.style.textDecoration = "line-through")
+        : (label.style.textDecoration = "none");
+      updateTodoCheckedStatus(todo.id, checkboxInput.checked);
+      saveTodosStorage();
+    });
+
+    const label = document.createElement("label");
+    label.setAttribute("for", checkboxInput.id);
+    label.textContent = todo.text;
+    label.style.textDecoration = todo.checked ? "line-through" : "none";
+
+    const closeButton = document.createElement("span");
+    closeButton.classList.add("close-btn");
+    closeButton.textContent = "X";
+    closeButton.addEventListener("click", () => {
+      todoBlock.removeChild(todoDiv);
+      todos = todos.filter((item) => item.id !== todo.id);
+      count--;
+      innerCount(count);
+      saveTodosStorage();
+    });
+
+    label.appendChild(closeButton);
+    todoDiv.appendChild(checkboxInput);
+    todoDiv.appendChild(label);
+    todoBlock.appendChild(todoDiv);
+  });
+
+  innerCount(todos.length);
+}
+
+// Load todos when the page loads
+window.addEventListener("load", loadLocal);
