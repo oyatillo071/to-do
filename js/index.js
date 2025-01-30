@@ -11,6 +11,8 @@ function localSave(data) {
   console.log(localStorage.getItem("checkboxList"));
 }
 localSave();
+// coments
+// coments
 
 function filterTodos(filter) {
   const allCheckboxes = updateCheckboxes();
