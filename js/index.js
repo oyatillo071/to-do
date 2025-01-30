@@ -12,6 +12,7 @@ function localSave(data) {
 }
 localSave();
 // coments
+// coments
 
 function filterTodos(filter) {
   const allCheckboxes = updateCheckboxes();
